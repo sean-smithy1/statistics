@@ -7,11 +7,11 @@ summary(mydata)
 qplot(mydata$Interval..Min,
 		geom="histogram",
 		main="Histogram for OldFaithful",
-		xlab="Min Between Eruptions",
+		xlab="Interval Between Eruptions",
 		fill=I("blue"),
 		col =I("white"),
-		xlim=c(40,100),
-		binwidth=5
+		xlim=c(42,95),
+		binwidth=6
 		)
 
 qplot(mydata$Duration..Min,
@@ -23,3 +23,7 @@ qplot(mydata$Duration..Min,
 		xlim=c(1,5),
 		binwidth=0.2
 		)
+
+ggplot(mydata, aes(x=Interval..Min., y=Duration..Min.)) +
+	geom_point(shape=1) +
+	geom_smooth(method=lm)

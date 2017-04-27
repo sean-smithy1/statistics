@@ -2,18 +2,36 @@ setwd("~/GitHub/statistics")
 library(ggplot2)
 library(grid)
 library(gridExtra)
-library(car)
-library(matlib)
 
 # TASK 1
-
 men100 <- read.csv("Men100.csv", header = TRUE)
 women100 <- read.csv("Women100.csv", header = TRUE)
 
-#Linear Models
+# Linear Models
 
 lm_men100=lm(Sec ~ Year, data=men100)
 lm_women100=lm(Secs ~ Year, data=women100)
+
+# Equations are:
+# y = -.028.x + 66 (women)
+# y = -.0076.x + 25 (men)
+
+# Therefore Intersect of these two lines is:
+# -.028.x + 66 = -.0076.x + 25
+# -.028x +.0076x = 25 - 66
+# -.0204x = -41
+# x = 2010 (Rounded up)
+
+#Check Y's equal
+# y = -.028 x 2010 +66 (women)
+#	y = 9.72 sec
+
+# y = -.0076 x 2010 + 25 (Men)
+# y = 9.72sec 
+
+# ANS: Men and Women predicted to be equal in 2010 at 9.72sec
+# Somthing Wrong - Dosn't line up with graph.....??
+
 
 # Plot with regression line women and men 100meter times
 p1=ggplot() +
@@ -25,8 +43,6 @@ p1=ggplot() +
 	geom_text(aes(x = 1990, y = 11, label = lm_eqn(lm_women100)), parse = TRUE) +	
 	xlab("Year") +
 	ylab("Seconds")
-
-p1
 
 #Summary of LM's
 summary(lm_men100)
@@ -60,3 +76,5 @@ p4 <- ggplot(boxplot, aes(x=group, y=Notch)) +
 	geom_boxplot()
 
 grid.arrange(p2,p3,p4, ncol=2, top = "Boxplots")
+
+
